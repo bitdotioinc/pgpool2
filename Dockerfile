@@ -12,3 +12,7 @@ WORKDIR /src/
 COPY . .
 
 RUN ./configure && make && make install
+
+RUN mkdir -p /var/run/pgpool
+
+CMD ["pgpool", "-n", "-d"]
