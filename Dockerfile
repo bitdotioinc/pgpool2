@@ -14,5 +14,6 @@ COPY . .
 RUN ./configure --with-openssl && make && make install
 
 RUN mkdir -p /var/run/pgpool
+RUN mkdir -p /var/log/pgpool
 
 CMD ["pgpool", "-n", "-d"]
