@@ -262,9 +262,7 @@ top_srcdir = @top_srcdir@
 
 # suggested by libtoolize
 ACLOCAL_AMFLAGS = -I m4
-GENERATED_SGML = bookindex.sgml version.sgml \
-					features-supported.sgml features-unsupported.sgml errcodes-table.sgml
-
+GENERATED_SGML = bookindex.sgml version.sgml
 ALLSGML := $(wildcard $(srcdir)/*.sgml $(srcdir)/ref/*.sgml) $(GENERATED_SGML)
 
 # Sometimes we don't want this one.

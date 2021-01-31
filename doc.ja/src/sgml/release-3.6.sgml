@@ -1,6 +1,88 @@
 <!-- doc/src/sgml/release-3.6.sgml -->
 <!-- See header comment in release.sgml about typical markup -->
 
+<sect1 id=release-3-6-24>
+ <!--
+ <title>Release 3.6.24</title>
+ -->
+ <title>リリース 3.6.24</title>
+ <note>
+  <!--
+  <title>Release Date</title>
+  -->
+  <title>リリース日</title>
+  <simpara>2020-11-19</simpara>
+ </note>
+
+ <sect2>
+  <!--
+  <title>Changes</title>
+  -->
+  <title>変更点</title>
+  <itemizedlist>
+   <listitem>
+    <!--
+    2020-10-03 [cc11de6]
+    -->
+    <para>
+     Doc: <productname>Pgpool-II</productname>が<acronym>GSSAPI</acronym>をサポートしないという注意事項を追加しました。(Tatsuo Ishii)
+    </para>
+   </listitem>
+
+   <listitem>
+    <!--
+    2020-10-03 [bcb7167]
+    -->
+    <para>
+	 フロントエンドが<acronym>GSSAPI</acronym>暗号化接続を要求した場合、
+	 <productname>Pgpool-II</productname>は<acronym>GSSAPI</acronym>をサポートしていないため、
+	 これまでエラーを返していましたが、他の方式での接続を要求するように変更しました。(Tatsuo Ishii)
+    </para>
+    <para>
+     パッチはTatsuo Ishiiにより作成され、Umar Hayatによりレビュー・テストされました。
+    </para>
+   </listitem>
+  </itemizedlist>
+ </sect2>
+
+ <sect2>
+  <!--
+  <title>Bug fixes</title>
+  -->
+  <title>不具合修正</title>
+  <itemizedlist>
+   <listitem>
+    <!--
+    2020-11-17 [94cbceb]
+    -->
+    <para>
+	 ネイティブレプリケーションモードで「INSERT ... ON CONFLICT」クエリ書換えの不具合を修正しました。
+     (<ulink url="https://www.pgpool.net/mantisbt/view.php?id=654">bug 654</ulink>) (Bo Peng)
+    </para>
+   </listitem>
+
+   <listitem>
+    <!--
+    2020-10-30 [79831b3]
+    -->
+    <para>
+	 クエリがキャンセルされたときにコネクションカウントが減少しない不具合を修正しました。
+     (<ulink url="https://www.pgpool.net/mantisbt/view.php?id=656">bug 656</ulink>) (Tatsuo Ishii)
+    </para>
+   </listitem>
+
+   <listitem>
+    <!--
+    2020-09-30 [af67e9b]
+    -->
+    <para>
+     Doc: <productname>PostgreSQL</productname>の使用可能なバージョンを7.4以降に修正しました。(Tatsuo Ishii)
+    </para>
+   </listitem>
+  </itemizedlist>
+ </sect2>
+</sect1>
+
 <sect1 id=release-3-6-23>
  <!--
  <title>Release 3.6.23</title>
@@ -64,9 +146,9 @@
     -->
     <para>
      <!--
-     Doc: fix the incorrect description regarding the running modes of Pgpoo-II in which online recovery is available. (Bo Peng)
+     Doc: fix the incorrect description regarding the running modes of Pgpool-II in which online recovery is available. (Bo Peng)
      -->
-     Doc: オンラインリカバリが利用可能なPgpoo-IIの動作モードに関する誤った説明を修正します。(Bo Peng)
+     Doc: オンラインリカバリが利用可能なPgpool-IIの動作モードに関する誤った説明を修正しました。(Bo Peng)
     </para>
    </listitem>
 
@@ -741,6 +823,18 @@
 
    <listitem>
     <!--
+    2019-09-04 [3ba4e73]
+    -->
+    <para>
+     <!--
+     Doc: mention that VIP will not be brougt up if quorum does not exist. (Tatsuo Ishii)
+     -->
+	 Doc: クォーラムが存在しない場合、VIPは起動されないことをドキュメントに追加しました。(Tatsuo Ishii)
+    </para>
+   </listitem>
+
+   <listitem>
+    <!--
     2019-08-16 [956c040]
     -->
     <para>
@@ -1240,9 +1334,9 @@
     -->
     <para>
      <!--
-     Fix <xref linkend="GUC-BLACK-FUNCTION-LIST">'s broken default value. (Tatsuo Ishii)
+     Fix <xref linkend="GUC-WRITE-FUNCTION-LIST">'s broken default value. (Tatsuo Ishii)
      -->
-     <xref linkend="GUC-BLACK-FUNCTION-LIST">のデフォル値が間違っていた不具合を修正しました。(Tatsuo Ishii)
+     <xref linkend="GUC-WRITE-FUNCTION-LIST">のデフォル値が間違っていた不具合を修正しました。(Tatsuo Ishii)
     </para>
    </listitem>
 
@@ -2125,9 +2219,9 @@
     -->
     <para>
      <!--
-     Doc: Change <xref linkend="GUC-FOLLOW-MASTER-COMMAND"> description "new master" to "new primary". (Bo Peng)
+     Doc: Change <xref linkend="GUC-FOLLOW-PRIMARY-COMMAND"> description "new master" to "new primary". (Bo Peng)
      -->
-     Doc: <xref linkend="GUC-FOLLOW-MASTER-COMMAND">ドキュメントの"new master"を"new primary"に変更しました。(Bo Peng)
+     Doc: <xref linkend="GUC-FOLLOW-PRIMARY-COMMAND">ドキュメントの"new master"を"new primary"に変更しました。(Bo Peng)
     </para>
    </listitem>
 
@@ -2950,7 +3044,7 @@
      -->
      <function>read_kind_from_backend()</function> は、バックエンドからメッセージを読み取り、"ready for query" メッセージが受信されたときにバックエンドノードを再同期します。
      しかし、<function>pool_pending_message_pull_out()</function> を呼び出して「sync メッセージを受信した」を削除することを忘れていました。
-     これによって、バックエンドからのパケットの読み取り中に <productname>Popool-II</productname> がハングアップする可能性がありました。
+     これによって、バックエンドからのパケットの読み取り中に <productname>Pgpool-II</productname> がハングアップする可能性がありました。
      <function>pool_pending_message_pull_out()</function>を呼び出し、「sync メッセージを受信した」を削除するように修正しました。
     </para>
    </listitem>
@@ -3464,7 +3558,7 @@
     2017-08-21 [1812a84]
     -->
     <para>
-     Doc: 英語/日本語ドキュメントに <link linkend="example-cluster">「Pgpoo-II + Watchdogの構築の例」</link>を追加しました。(Bo Peng)
+     Doc: 英語/日本語ドキュメントに <link linkend="example-cluster">「Pgpool-II + Watchdogの構築の例」</link>を追加しました。(Bo Peng)
     </para>
    </listitem>
 
@@ -4457,7 +4551,7 @@
       <listitem>
        <para>
         <!--
-	Pgool-II forward it to backend 1
+	Pgpool-II forward it to backend 1
 	-->
 	Pgpool-IIはそれをバックエンド1に転送します。
        </para>
@@ -4473,7 +4567,7 @@
       <listitem>
        <para>
         <!--
-	Pgool-II forward it to backend 0 & 1
+	Pgpool-II forward it to backend 0 & 1
 	-->
 	Pgpool-IIはそれをバックエンド0と1に転送します。
        </para>
@@ -4489,7 +4583,7 @@
       <listitem>
        <para>
         <!--
-	Pgool-II forward it to backend 0 & 1
+	Pgpool-II forward it to backend 0 & 1
 	-->
 	Pgpool-IIはそれをバックエンド0と1に転送します。
        </para>
@@ -5198,14 +5292,14 @@
    <listitem>
     <!--
     2016-04-07 [0e01d32] removing the limit on the maximum number
-    of items in the black_function_list and white_function_list lists.
+    of items in the black_function_list and read_only_function_list lists.
     -->
     <para>
      <!--
      Allow to use arbitrary number of items in the
-     black_function_list/white_function_list. (Muhammad Usama)
+     black_function_list/read_only_function_list. (Muhammad Usama)
      -->
-     black_function_list/white_function_list
+     black_function_list/read_only_function_list
      に任意のアイテムの数が使用できるようになりました。(Muhammad Usama)
     </para>
     <para>

@@ -1,6 +1,97 @@
 <!-- doc/src/sgml/release-4.0.sgml -->
 <!-- See header comment in release.sgml about typical markup -->
 
+<sect1 id=release-4-0-12>
+ <!--
+ <title>Release 4.0.12</title>
+ -->
+ <title>リリース 4.0.12</title>
+ <note>
+  <!--
+  <title>Release Date</title>
+  -->
+  <title>リリース日</title>
+  <simpara>2020-11-19</simpara>
+ </note>
+
+ <sect2>
+  <!--
+  <title>Changes</title>
+  -->
+  <title>変更点</title>
+  <itemizedlist>
+   <listitem>
+    <!--
+    2020-11-17 [544cb97]
+    -->
+    <para>
+     Doc: ドキュメントの「Auroraの設定例」を更新しました。(Bo Peng)
+    </para>
+   </listitem>
+
+   <listitem>
+    <!--
+    2020-10-03 [e24d792]
+    -->
+    <para>
+     Doc: <productname>Pgpool-II</productname>が<acronym>GSSAPI</acronym>をサポートしないという注意事項を追加しました。(Tatsuo Ishii)
+    </para>
+   </listitem>
+
+   <listitem>
+    <!--
+    2020-10-03 [db31d2c]
+    -->
+    <para>
+	 フロントエンドが<acronym>GSSAPI</acronym>暗号化接続を要求した場合、
+	 <productname>Pgpool-II</productname>は<acronym>GSSAPI</acronym>をサポートしていないため、
+	 これまでエラーを返していましたが、他の方式での接続を要求するように変更しました。(Bo Peng)
+    </para>
+    <para>
+     パッチはTatsuo Ishiiにより作成され、Umar Hayatによりレビュー・テストされました。
+    </para>
+   </listitem>
+  </itemizedlist>
+ </sect2>
+
+ <sect2>
+  <!--
+  <title>Bug fixes</title>
+  -->
+  <title>不具合修正</title>
+  <itemizedlist>
+   <listitem>
+    <!--
+    2020-11-17 [94cbceb]
+    -->
+    <para>
+	 ネイティブレプリケーションモードで「INSERT ... ON CONFLICT」クエリ書換えの不具合を修正しました。
+     (<ulink url="https://www.pgpool.net/mantisbt/view.php?id=654">bug 654</ulink>) (Bo Peng)
+    </para>
+   </listitem>
+
+   <listitem>
+    <!--
+    2020-10-30 [37d32b9]
+    -->
+    <para>
+	 クエリがキャンセルされたときにコネクションカウントが減少しない不具合を修正しました。
+     (<ulink url="https://www.pgpool.net/mantisbt/view.php?id=656">bug 656</ulink>) (Tatsuo Ishii)
+    </para>
+   </listitem>
+
+   <listitem>
+    <!--
+    2020-09-30 [3cd8c2b]
+    -->
+    <para>
+     Doc: <productname>PostgreSQL</productname>の使用可能なバージョンを7.4以降に修正しました。(Tatsuo Ishii)
+    </para>
+   </listitem>
+  </itemizedlist>
+ </sect2>
+</sect1>
+
 <sect1 id=release-4-0-11>
  <!--
  <title>Release 4.0.11</title>
@@ -64,9 +155,9 @@
     -->
     <para>
      <!--
-     Doc: fix the incorrect description regarding the running modes of Pgpoo-II in which online recovery is available. (Bo Peng)
+     Doc: fix the incorrect description regarding the running modes of Pgpool-II in which online recovery is available. (Bo Peng)
      -->
-     Doc: オンラインリカバリが利用可能なPgpoo-IIの動作モードに関する誤った説明を修正します。(Bo Peng)
+     Doc: オンラインリカバリが利用可能なPgpool-IIの動作モードに関する誤った説明を修正しました。(Bo Peng)
     </para>
    </listitem>
 
@@ -1661,9 +1752,9 @@
     -->
     <para>
      <!--
-     Fix <xref linkend="GUC-BLACK-FUNCTION-LIST">'s broken default value. (Tatsuo Ishii)
+     Fix <xref linkend="GUC-WRITE-FUNCTION-LIST">'s broken default value. (Tatsuo Ishii)
      -->
-     <xref linkend="GUC-BLACK-FUNCTION-LIST">のデフォル値が間違っていた不具合を修正しました。(Tatsuo Ishii)
+     <xref linkend="GUC-WRITE-FUNCTION-LIST">のデフォル値が間違っていた不具合を修正しました。(Tatsuo Ishii)
     </para>
    </listitem>
 
@@ -1934,15 +2025,15 @@
     -->
     <para>
      <!--
-     Doc: add more explanation to <xref linkend="guc-follow-master-command">. (Tatsuo Ishii)
+     Doc: add more explanation to <xref linkend="guc-follow-primary-command">. (Tatsuo Ishii)
      -->
-     Doc：<xref linkend="guc-follow-master-command">に関する説明を追加しました。(Tatsuo Ishii)
+     Doc：<xref linkend="guc-follow-primary-command">に関する説明を追加しました。(Tatsuo Ishii)
     </para>
     <para>
      <!--
-     Add description how <xref linkend="guc-follow-master-command"> is executed etc.
+     Add description how <xref linkend="guc-follow-primary-command"> is executed etc.
      -->
-     <xref linkend="guc-follow-master-command">の実行条件などの説明を追加しました。
+     <xref linkend="guc-follow-primary-command">の実行条件などの説明を追加しました。
     </para>
    </listitem>
 
@@ -2986,10 +3077,10 @@
     -->
     <para>
      <!--
-     Add new parameter <xref linkend="guc-black-query-pattern-list"> to enable
+     Add new parameter <xref linkend="guc-primary-routing-query-pattern-list"> to enable
      specifying SQL patterns lists that should not be load-balanced. (Bo Peng)
      -->
-     負荷分散すべきではないSQLパターンのリストを指定できる<xref linkend="guc-black-query-pattern-list"> を追加しました。(Bo Peng)
+     負荷分散すべきではないSQLパターンのリストを指定できる<xref linkend="guc-primary-routing-query-pattern-list"> を追加しました。(Bo Peng)
     </para>
     <para>
      <!--

@@ -100,7 +100,7 @@
      <listitem>
       <para>
        If a database is replicated (because running in either
-       replication mode or master/slave mode), performing a SELECT
+       replication mode or native replication mode), performing a SELECT
        query on any server will return the same result. <productname>Pgpool-II</productname>
        takes advantage of the replication feature in order to reduce
        the load on each PostgreSQL server.  It does that by
@@ -184,7 +184,7 @@
        create a robust cluster system and avoid the single point of failure or split brain.
        To avoid the split brain, you need at least 3 <productname>Pgpool-II</productname> nodes.
        Watchdog can perform lifecheck against other <productname>pgpool-II</productname> nodes,
-       to detect a fault of <productname>Pgpoll-II</productname>.
+       to detect a fault of <productname>Pgpool-II</productname>.
        If active <productname>Pgpool-II</productname> goes down, standby
        <productname>Pgpool-II</productname> can be promoted to active, and take over Virtual IP.
       </para>
@@ -224,11 +224,8 @@
   <para>
    <productname>Pgpool-II</productname> works on Linux, Solaris,
    FreeBSD, and most of the UNIX-like architectures. Windows is not
-   supported. Supported PostgreSQL server's versions are 6.4 and
-   higher.  If you are using <productname>PostgreSQL</productname>
-   7.3 or older, some features
-   of <productname>Pgpool-II</productname> won't be available. But
-   you shouldn't use such an old release anyway.  You must also make
+   supported. Supported PostgreSQL server's versions are 7.4 and
+   higher. You must also make
    sure that all of your <productname>PostgreSQL</productname>
    servers are using the same major version. In addition to this, we
    do not recommend mixing
